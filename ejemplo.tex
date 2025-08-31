@@ -1,0 +1,150 @@
+\documentclass{simplenotes}
+
+\title{Ejemplo de \texttt{simplenotes}}
+\author{Jeremías Martinez Ciucio}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Introducción}
+
+Esta es una demostración de la clase \texttt{simplenotes}. Incluye teoremas, definiciones, notas, cajas con íconos y fragmentos de código.
+
+Está basada en la clase \texttt{article}, e incluye ya configuraciones de idioma (con español preconfigurado), fuente, geometría, etc.
+En el caso de necesitar artículo, se puede cambiar la línea \texttt{LoadClass} para que se base en \texttt{report}
+
+
+% ===================================
+
+
+\section{Entornos tipo teorema} \label{sec:teoremas}
+
+Son los entornos \texttt{theorem}, \texttt{definition} y \texttt{lemma}. Estos pueden estar numerados o no.
+
+
+\subsection{Entornos sin numerar}
+Se usan de la siguiente forma:
+\begin{verbatim}
+  \begin{<entorno>}{<título>}
+    ...
+  \end{<entorno>}
+\end{verbatim}
+Donde \texttt{<entorno>} es el tipo de entorno. Y de forma opcional, \texttt{<título>} es el título que aparecerá encima. 
+
+\noindent
+\textbf{Ejemplo:}
+\begin{theorem*}{Teorema de Pitágoras}
+En un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.  
+Es decir, si el triángulo tiene catetos $a$ y $b$, y hipotenusa $c$, entonces:
+\[
+c^2 = a^2 + b^2.
+\]
+\end{theorem*}
+
+
+\subsection{Entornos numerados} 
+Estos, a diferencia de los otros, son numerados automáticamente por \LaTeX.
+Como ventaja adicional permiten referenciarlos en el texto.
+
+Su uso es el siguiente:
+\begin{verbatim}
+\begin{<entorno>}{<título>}{<etiqueta>}
+  ...
+\end{<entorno>}
+\end{verbatim}
+Donde \texttt{<entorno>} es el tipo de entorno, \texttt{<título>} el título que se muestra en la parte superior, y \texttt{<etiqueta>} la etiqueta que luego se va a utilizar para referenciarlo mediante \verb|\ref{<entorno>:<etiqueta>}|. El siguiente es el lema \ref{lemma:lema-ejem}
+\noindent
+
+\textbf{Ejemplo:}
+\begin{lemma}{Números pares}{lema-ejem}
+Todo número par es divisible por 2.
+\end{lemma}
+
+
+% ===================================
+
+
+\section{Entornos tipo propiedad rápida}
+\noindent
+Estos son \texttt{property}, \texttt{proposition}, \texttt{note} y \texttt{convention}. Se utilizan como cualquier entorno normal de \LaTeX.
+\begin{property}
+La multiplicación por cero anula cualquier número: $a\cdot 0 = 0$.
+\end{property}
+
+\begin{proposition}
+Si $x > 0$, entonces $x^2 > 0$.
+\end{proposition}
+
+\begin{note}
+Esta es una nota sobre lo anterior.
+\end{note}
+
+\begin{convention}
+Se usa la notación $f: A \to B$ para funciones.
+\end{convention}
+
+
+% ===================================
+
+
+\section{Cajas con íconos}
+\noindent
+Son los entornos \texttt{observation}, \texttt{remark}, \texttt{question}, \texttt{exercise} e \texttt{important}. Al igual que los de propiedad rápida, se usan como cualquier entorno normal.
+
+
+\begin{observation}
+Observación importante sobre el contenido.
+\end{observation}
+
+\begin{remark}
+Este es un comentario adicional.
+\end{remark}
+
+\begin{question}
+Pregunta para reflexionar.
+\end{question}
+
+\begin{exercise}
+Ejercicio de práctica: Demuestra el teorema anterior.
+\end{exercise}
+
+\begin{important}
+¡Atención! Este concepto es crítico.
+\end{important}
+
+
+% ===================================
+
+
+\section{Fragmentos de código}
+Podemos insertar código de dos formas distintas. La primera simplemente muestra el código con resaltado por color y números de línea. Para eso utilizamos el entorno \texttt{snippet}.
+Para utilizarlo, debemos especificar el lenguaje de programación que contiene, lo que se utiliza para el resaltado de las palabras clave
+El siguiente ejemplo usa \verb|\begin{snippet}{python} ... \end{snippet}|
+
+\begin{snippet}{python}
+for i in range(5):
+    print(i)
+\end{snippet}
+
+También podemos envolver el bloque de código en una caja similar a la de los teoremas. Para esto utilizamos el entorno \texttt{codebox}. Este puede ser tanto numerado como no numerado, y sus parámetros funcionan igual que los de los entornos de teorema (ver la sección \ref{sec:teoremas} para su uso).
+
+Es importante que dentro del \texttt{codebox}, utilicemos un \texttt{snippet}, ya que es lo que nos dará el formato del código.
+
+\begin{codebox*}{Código en Python}
+  \begin{snippet}{python}
+  def saludar(nombre):
+      print(f"Hola, {nombre}!")
+  \end{snippet}
+\end{codebox*}
+\noindent
+Finalmente, podemos importar archivos externos como un snippet con el comando
+\begin{verbatim}
+inputsnippet{<archivo>}{<lenguaje>}
+\end{verbatim}
+de esta forma podemos tener el código en un archivo distinto, lo que mejora la mantenibilidad
+
+\end{document}
+
